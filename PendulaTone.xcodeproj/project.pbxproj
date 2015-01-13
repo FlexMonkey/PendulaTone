@@ -13,6 +13,7 @@
 		3E4F65F91A64FDE00091F5D1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E4F65F81A64FDE00091F5D1 /* Images.xcassets */; };
 		3E4F65FC1A64FDE00091F5D1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E4F65FA1A64FDE00091F5D1 /* LaunchScreen.xib */; };
 		3E4F66081A64FDE00091F5D1 /* PendulaToneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4F66071A64FDE00091F5D1 /* PendulaToneTests.swift */; };
+		3E4F66131A64FE250091F5D1 /* Pendulum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4F66121A64FE250091F5D1 /* Pendulum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		3E4F66011A64FDE00091F5D1 /* PendulaToneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PendulaToneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E4F66061A64FDE00091F5D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E4F66071A64FDE00091F5D1 /* PendulaToneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendulaToneTests.swift; sourceTree = "<group>"; };
+		3E4F66121A64FE250091F5D1 /* Pendulum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pendulum.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		3E4F65EE1A64FDE00091F5D1 /* PendulaTone */ = {
 			isa = PBXGroup;
 			children = (
+				3E4F66111A64FE0F0091F5D1 /* pendulum */,
 				3E4F65F11A64FDE00091F5D1 /* AppDelegate.swift */,
 				3E4F65F31A64FDE00091F5D1 /* ViewController.swift */,
 				3E4F65F51A64FDE00091F5D1 /* Main.storyboard */,
@@ -110,6 +113,14 @@
 				3E4F66061A64FDE00091F5D1 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3E4F66111A64FE0F0091F5D1 /* pendulum */ = {
+			isa = PBXGroup;
+			children = (
+				3E4F66121A64FE250091F5D1 /* Pendulum.swift */,
+			);
+			name = pendulum;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E4F66131A64FE250091F5D1 /* Pendulum.swift in Sources */,
 				3E4F65F41A64FDE00091F5D1 /* ViewController.swift in Sources */,
 				3E4F65F21A64FDE00091F5D1 /* AppDelegate.swift in Sources */,
 			);
