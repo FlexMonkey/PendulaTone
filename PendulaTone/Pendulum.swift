@@ -26,7 +26,7 @@ class Pendulum: UIControl
         self.pendulumLength = pendulumLength
         self.index = index
         
-        duration = NSTimeInterval(sqrt(Float(pendulumLength / 55)))
+        duration = NSTimeInterval(pendulumLength)
         
         super.init(frame: CGRectZero)
     }
