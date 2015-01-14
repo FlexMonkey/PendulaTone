@@ -17,6 +17,9 @@ class Pendulum: UIControl
     let pendulumLength: Float
     let index: Int
     let duration: NSTimeInterval
+    let angle = CGFloat((25 * M_PI ) / 180)
+
+    var direction = CGFloat(-1);
     
     init(pendulumLength: Float, index: Int)
     {
@@ -38,24 +41,24 @@ class Pendulum: UIControl
         layer.backgroundColor = UIColor.grayColor().CGColor
         
         layer.addSublayer(pendulumShape)
-    }
-    
-    let angle = CGFloat((25 * M_PI ) / 180)
-    
-    override func layoutSubviews()
-    {
+        
         pendulumShape.drawPendulum(index * 25) // Int(pendulumLength)
         
         transform = CGAffineTransformMakeRotation(-angle)
         
-        uiAnimateComplete(true)
+        swing(true)
     }
     
-    func uiAnimateComplete(value: Bool) -> Void
+    func swing(value: Bool)
     {
-        UIView.animateWithDuration(duration, delay: 0, options: UIViewAnimationOptions.Repeat | UIViewAnimationOptions.Autoreverse | UIViewAnimationOptions.CurveEaseInOut, animations: { self.transform = CGAffineTransformMakeRotation(self.angle) }, completion: uiAnimateComplete)
+        direction = -direction
+        
+        transform = CGAffineTransformMakeRotation(direction * angle)
+        
+        UIView.animateWithDuration(duration, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { self.transform = CGAffineTransformMakeRotation(-self.direction * self.angle) }, completion: swing)
     }
     
+ 
 }
 
 class PendulumShape: CAShapeLayer

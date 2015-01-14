@@ -16,7 +16,7 @@ class ViewController: UIViewController
     {
         super.viewDidLoad()
     
-        for i in  3 ... 20
+        for i in 3 ... 20
         {
             let pendulumLength = 60 / (Float(i) * 0.5)
             
