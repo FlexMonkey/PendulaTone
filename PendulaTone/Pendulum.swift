@@ -14,11 +14,16 @@ class Pendulum: UIControl
 {
     let pendulumShape = PendulumShape()
     
-    var pendulumLength: Float
+    let pendulumLength: Float
+    let index: Int
+    let duration: NSTimeInterval
     
-    init(pendulumLength: Float)
+    init(pendulumLength: Float, index: Int)
     {
         self.pendulumLength = pendulumLength
+        self.index = index
+        
+        duration = NSTimeInterval(sqrt(Float(pendulumLength / 55)))
         
         super.init(frame: CGRectZero)
     }
@@ -39,7 +44,7 @@ class Pendulum: UIControl
     
     override func layoutSubviews()
     {
-        pendulumShape.drawPendulum(Int(pendulumLength))
+        pendulumShape.drawPendulum(index * 25) // Int(pendulumLength)
         
         transform = CGAffineTransformMakeRotation(-angle)
         
@@ -48,8 +53,6 @@ class Pendulum: UIControl
     
     func uiAnimateComplete(value: Bool) -> Void
     {
-        let duration = NSTimeInterval(sqrt(Float(pendulumLength) / 40))
-        
         UIView.animateWithDuration(duration, delay: 0, options: UIViewAnimationOptions.Repeat | UIViewAnimationOptions.Autoreverse | UIViewAnimationOptions.CurveEaseInOut, animations: { self.transform = CGAffineTransformMakeRotation(self.angle) }, completion: uiAnimateComplete)
     }
     
@@ -61,8 +64,6 @@ class PendulumShape: CAShapeLayer
     
     func drawPendulum(pendulumLength: Int)
     {
-        let displayLength = (pendulumLength * 12) - 450
-        
         strokeColor = UIColor.blueColor().CGColor
         lineWidth = 1
         fillColor = UIColor.blueColor().CGColor
@@ -72,11 +73,11 @@ class PendulumShape: CAShapeLayer
         
         pendulumPath.removeAllPoints()
         
-        let rect = CGRect(x: 0, y: 0, width: 1, height: displayLength)
+        let rect = CGRect(x: 0, y: 0, width: 1, height: pendulumLength)
         let rectPath = UIBezierPath(rect: rect)
         pendulumPath.appendPath(rectPath)
         
-        let ballRect = CGRect(x: -10, y: displayLength, width: 20, height: 20)
+        let ballRect = CGRect(x: -10, y: pendulumLength, width: 20, height: 20)
         let ballPath = UIBezierPath(ovalInRect: ballRect)
         pendulumPath.appendPath(ballPath)
         

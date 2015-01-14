@@ -16,11 +16,11 @@ class ViewController: UIViewController
     {
         super.viewDidLoad()
     
-        for i in 4 ... 12
+        for i in  3 ... 20
         {
-            let pendulumLength = sqrt(Float(i * 400))
+            let pendulumLength = 60 / (Float(i) * 0.5)
             
-            let pendulum = Pendulum(pendulumLength: pendulumLength)
+            let pendulum = Pendulum(pendulumLength: pendulumLength * pendulumLength, index: 21 - i)
             
             pendula.append(pendulum)
             view.addSubview(pendulum)
