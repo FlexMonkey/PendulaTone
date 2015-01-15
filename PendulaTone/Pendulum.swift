@@ -26,11 +26,21 @@ class Pendulum: UIControl
         self.pendulumDuration = NSTimeInterval(pendulumDuration)
         
         super.init(frame: CGRectZero)
+        
+        userInteractionEnabled = false
     }
 
     required init(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    var isSelected: Bool = false
+    {
+        didSet
+        {
+            pendulumShape.fillColor = isSelected ? UIColor.blueColor().CGColor : UIColor.lightGrayColor().CGColor
+        }
     }
     
     override func didMoveToSuperview()
@@ -64,10 +74,10 @@ class PendulumShape: CAShapeLayer
     {
         strokeColor = UIColor.blueColor().CGColor
         lineWidth = 1
-        fillColor = UIColor.blueColor().CGColor
+        fillColor = UIColor.lightGrayColor().CGColor
         masksToBounds = false
         
-        drawsAsynchronously = true
+        drawsAsynchronously = false
         
         pendulumPath.removeAllPoints()
         
