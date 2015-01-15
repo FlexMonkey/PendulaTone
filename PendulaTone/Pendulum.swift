@@ -5,6 +5,8 @@
 //  Created by Simon Gladman on 13/01/2015.
 //  Copyright (c) 2015 Simon Gladman. All rights reserved.
 //
+//  Grey color inidicates no instrument, blue indicates instrument
+//  Solid ball indicates selected pendulum
 
 import Foundation
 import UIKit
@@ -28,6 +30,8 @@ class Pendulum: UIControl
         super.init(frame: CGRectZero)
         
         userInteractionEnabled = false
+        
+        setPendulumColors()
     }
 
     required init(coder aDecoder: NSCoder)
@@ -35,12 +39,28 @@ class Pendulum: UIControl
         fatalError("init(coder:) has not been implemented")
     }
     
+    var instrument: String = "None"
+    {
+        didSet
+        {
+            setPendulumColors()
+        }
+    }
+    
     var isSelected: Bool = false
     {
         didSet
         {
-            pendulumShape.fillColor = isSelected ? UIColor.blueColor().CGColor : UIColor.lightGrayColor().CGColor
+            setPendulumColors()
         }
+    }
+    
+    func setPendulumColors()
+    {
+        let color = instrument == "None" ? UIColor.darkGrayColor().CGColor : UIColor.blueColor().CGColor
+       
+        pendulumShape.strokeColor = color
+       pendulumShape.fillColor = isSelected ? color : UIColor.lightGrayColor().CGColor
     }
     
     override func didMoveToSuperview()
@@ -72,9 +92,7 @@ class PendulumShape: CAShapeLayer
     
     func drawPendulum(pendulumLength: Int)
     {
-        strokeColor = UIColor.blueColor().CGColor
         lineWidth = 1
-        fillColor = UIColor.lightGrayColor().CGColor
         masksToBounds = false
         
         drawsAsynchronously = false
