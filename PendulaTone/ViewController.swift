@@ -18,9 +18,10 @@ class ViewController: UIViewController
     
         for i in 3 ... 20
         {
-            let pendulumLength = 30 / Float(i)
+            let pendulumDuration = (15 / Float(i))
+            let pendulumLength = (21 - i) * 25
             
-            let pendulum = Pendulum(pendulumLength: pendulumLength , index: 21 - i)
+            let pendulum = Pendulum(pendulumDuration: pendulumDuration , pendulumLength: pendulumLength)
             
             pendula.append(pendulum)
             view.addSubview(pendulum)

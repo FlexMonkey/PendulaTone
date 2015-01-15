@@ -14,19 +14,16 @@ class Pendulum: UIControl
 {
     let pendulumShape = PendulumShape()
     
-    let pendulumLength: Float
-    let index: Int
-    let duration: NSTimeInterval
+    let pendulumLength: Int
+    let pendulumDuration: NSTimeInterval
+    
     let angle = CGFloat((25 * M_PI ) / 180)
-
     var direction = CGFloat(-1);
     
-    init(pendulumLength: Float, index: Int)
+    init(pendulumDuration: Float, pendulumLength: Int)
     {
         self.pendulumLength = pendulumLength
-        self.index = index
-        
-        duration = NSTimeInterval(pendulumLength)
+        self.pendulumDuration = NSTimeInterval(pendulumDuration)
         
         super.init(frame: CGRectZero)
     }
@@ -42,20 +39,18 @@ class Pendulum: UIControl
         
         layer.addSublayer(pendulumShape)
         
-        pendulumShape.drawPendulum(index * 25) // Int(pendulumLength)
-        
-        transform = CGAffineTransformMakeRotation(-angle)
+        pendulumShape.drawPendulum(pendulumLength)
         
         swing(true)
     }
     
     func swing(value: Bool)
     {
-        direction = -direction
-        
         transform = CGAffineTransformMakeRotation(direction * angle)
         
-        UIView.animateWithDuration(duration, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { self.transform = CGAffineTransformMakeRotation(-self.direction * self.angle) }, completion: swing)
+        direction = -direction
+        
+        UIView.animateWithDuration(pendulumDuration, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { self.transform = CGAffineTransformMakeRotation(self.direction * self.angle) }, completion: swing)
     }
     
  
