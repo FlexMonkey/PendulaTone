@@ -18,20 +18,27 @@ class Pendulum: UIControl
     
     let pendulumLength: Int
     let pendulumDuration: NSTimeInterval
+    let mandolin: Mandolin
+    let noteFrequency: Double
     
     let angle = CGFloat((25 * M_PI ) / 180)
     var direction = CGFloat(-1);
     
-    init(pendulumDuration: Float, pendulumLength: Int)
+    init(pendulumDuration: Float, pendulumLength: Int, noteFrequency: Double)
     {
         self.pendulumLength = pendulumLength
         self.pendulumDuration = NSTimeInterval(pendulumDuration)
+        self.noteFrequency = noteFrequency
+        
+        mandolin = Mandolin(noteFrequency: noteFrequency)
         
         super.init(frame: CGRectZero)
         
         userInteractionEnabled = false
         
         setPendulumColors()
+   
+        AKOrchestra.addInstrument(mandolin)
     }
 
     required init(coder aDecoder: NSCoder)
@@ -39,15 +46,7 @@ class Pendulum: UIControl
         fatalError("init(coder:) has not been implemented")
     }
     
-    var instrument: String = "None"
-    {
-        didSet
-        {
-            setPendulumColors()
-        }
-    }
-    
-    var isSelected: Bool = false
+    var isSelected: Bool = true
     {
         didSet
         {
@@ -57,10 +56,7 @@ class Pendulum: UIControl
     
     func setPendulumColors()
     {
-        let color = instrument == "None" ? UIColor.darkGrayColor().CGColor : UIColor.blueColor().CGColor
-       
-        pendulumShape.strokeColor = color
-       pendulumShape.fillColor = isSelected ? color : UIColor.lightGrayColor().CGColor
+       pendulumShape.fillColor = isSelected ? UIColor.blueColor().CGColor : UIColor.lightGrayColor().CGColor
     }
     
     override func didMoveToSuperview()
@@ -81,9 +77,34 @@ class Pendulum: UIControl
         direction = -direction
         
         UIView.animateWithDuration(pendulumDuration, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { self.transform = CGAffineTransformMakeRotation(self.direction * self.angle) }, completion: swing)
+        
+        mandolin.stop()
+        mandolin.play()
     }
     
  
+}
+
+class Mandolin: AKInstrument
+{
+    init(noteFrequency: Double)
+    {
+        super.init()
+        
+        let frequency = AKInstrumentProperty(value: Float(noteFrequency),  minimum: 0, maximum: 1000)
+        let amplitude = AKInstrumentProperty(value: 0.04, minimum: 0,   maximum: 0.25)
+        
+        addProperty(frequency)
+        addProperty(amplitude)
+        
+        let fmOscillator = AKMandolin()
+        
+        fmOscillator.frequency = frequency
+        fmOscillator.amplitude = amplitude
+        
+        connect(fmOscillator)
+        connect(AKAudioOutput(audioSource: fmOscillator))
+    }
 }
 
 class PendulumShape: CAShapeLayer
