@@ -97,13 +97,14 @@ class Mandolin: AKInstrument
         addProperty(frequency)
         addProperty(amplitude)
         
-        let fmOscillator = AKMandolin()
+        let mandolin = AKMandolin()
         
-        fmOscillator.frequency = frequency
-        fmOscillator.amplitude = amplitude
+        mandolin.frequency = frequency
+        mandolin.amplitude = amplitude
+        mandolin.bodySize = 0.7.ak
+        connect(mandolin)
         
-        connect(fmOscillator)
-        connect(AKAudioOutput(audioSource: fmOscillator))
+        connect(AKAudioOutput(audioSource: mandolin))
     }
 }
 
