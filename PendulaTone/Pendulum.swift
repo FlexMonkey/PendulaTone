@@ -77,9 +77,7 @@ class Pendulum: UIControl
         direction = -direction
         
         UIView.animateWithDuration(pendulumDuration, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { self.transform = CGAffineTransformMakeRotation(self.direction * self.angle) }, completion: swing)
-        
-        mandolin.stop()
-        mandolin.play()
+        mandolin.playForDuration(3.0)
     }
     
  
