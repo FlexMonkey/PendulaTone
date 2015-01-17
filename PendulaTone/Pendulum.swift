@@ -77,9 +77,7 @@ class Pendulum: UIControl
         direction = -direction
         
         UIView.animateWithDuration(pendulumDuration, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { self.transform = CGAffineTransformMakeRotation(self.direction * self.angle) }, completion: swing)
-        
-        mandolin.stop()
-        mandolin.play()
+        mandolin.playForDuration(3.0)
     }
     
  
@@ -97,13 +95,14 @@ class Mandolin: AKInstrument
         addProperty(frequency)
         addProperty(amplitude)
         
-        let fmOscillator = AKMandolin()
+        let mandolin = AKMandolin()
         
-        fmOscillator.frequency = frequency
-        fmOscillator.amplitude = amplitude
+        mandolin.frequency = frequency
+        mandolin.amplitude = amplitude
+        mandolin.bodySize = 0.7.ak
+        connect(mandolin)
         
-        connect(fmOscillator)
-        connect(AKAudioOutput(audioSource: fmOscillator))
+        connect(AKAudioOutput(audioSource: mandolin))
     }
 }
 
