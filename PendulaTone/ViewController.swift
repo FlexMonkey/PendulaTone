@@ -30,8 +30,6 @@ class ViewController: UIViewController
             pendula.append(pendulum)
             view.addSubview(pendulum)
         }
-
-        AKOrchestra.start()
     }
     
     override func viewDidLayoutSubviews()
