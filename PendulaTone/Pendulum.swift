@@ -46,7 +46,7 @@ class Pendulum: UIControl
         fatalError("init(coder:) has not been implemented")
     }
     
-    var isSelected: Bool = true
+    var isCurrentSelection: Bool = true
     {
         didSet
         {
@@ -56,7 +56,7 @@ class Pendulum: UIControl
     
     func setPendulumColors()
     {
-       pendulumShape.fillColor = isSelected ? UIColor.blueColor().CGColor : UIColor.lightGrayColor().CGColor
+       pendulumShape.fillColor = isCurrentSelection ? UIColor.blueColor().CGColor : UIColor.lightGrayColor().CGColor
     }
     
     override func didMoveToSuperview()
@@ -67,7 +67,7 @@ class Pendulum: UIControl
         
         pendulumShape.drawPendulum(pendulumLength)
         
-        swing(true)
+        swing(true) 
     }
     
     func swing(value: Bool)
