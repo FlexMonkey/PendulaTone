@@ -19,7 +19,7 @@ class ViewController: UIViewController
         
         view.backgroundColor = UIColor.lightGrayColor()
 
-        for (idx: Int, noteFrequency: Double) in enumerate(notes)
+        for (idx, noteFrequency): (Int, Double) in notes.enumerate()
         {
             let i = idx + 5
             let pendulumDuration = (15 / Float(i))
@@ -34,7 +34,7 @@ class ViewController: UIViewController
     
     override func viewDidLayoutSubviews()
     {
-        for (idx: Int, pendulum: Pendulum) in enumerate(pendula)
+        for (_, pendulum): (Int, Pendulum) in pendula.enumerate()
         {
             pendulum.frame = CGRect(x: view.frame.width / 2, y: 20, width: 0, height: 0)
         }

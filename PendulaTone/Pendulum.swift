@@ -10,6 +10,7 @@
 
 import Foundation
 import UIKit
+import AudioKit
 
 
 class Pendulum: UIControl
@@ -18,7 +19,7 @@ class Pendulum: UIControl
     
     let pendulumLength: Int
     let pendulumDuration: NSTimeInterval
-    let mandolin: Mandolin
+    var mandolin: Mandolin
     let noteFrequency: Double
     
     let angle = CGFloat((25 * M_PI ) / 180)
@@ -41,7 +42,7 @@ class Pendulum: UIControl
         AKOrchestra.addInstrument(mandolin)
     }
 
-    required init(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
     }
