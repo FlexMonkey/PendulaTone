@@ -9,3 +9,6 @@ build/
 *.xccheckout
 project.xcworkspace/
 xcuserdata/
+
+
+Pods/
